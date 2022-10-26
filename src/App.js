@@ -6,7 +6,7 @@ function App() {
       <h1>My ToDos</h1>
       <Todo title='Learn React' />
       <Todo title='Master React' />
-      <Todo title='Eat Ice Cream React' />
+      <Todo title='Eat Ice Cream' />
     </div>
   );
 }
