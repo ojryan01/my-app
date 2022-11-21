@@ -4,11 +4,11 @@ import "./MainNavigation.scss";
 function MainNavigation() {
   return (
     <header className="header">
-      <div className="logo">React Meetups</div>
+      <div className="logo">National Parks Wish List</div>
       <nav>
         <ul>
           <li>
-            <Link to="/new-meetup">New Meetup</Link>{" "}
+            <Link to="/new-meetup">New Park</Link>{" "}
           </li>
           <li>
             {" "}
@@ -16,7 +16,7 @@ function MainNavigation() {
           </li>
           <li>
             {" "}
-            <Link to="/">All Meetups</Link>
+            <Link to="/">All Parks</Link>
           </li>
         </ul>
       </nav>
