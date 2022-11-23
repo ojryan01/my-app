@@ -1,5 +1,7 @@
+import NewVisitForm from "../components/layout/NewVisitForm";
+
 function NewMeetupPage() {
-  return <div>New Meetup</div>;
+  return <NewVisitForm />;
 }
 
 export default NewMeetupPage;
