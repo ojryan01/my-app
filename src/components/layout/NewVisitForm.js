@@ -22,7 +22,7 @@ function NewVisitForm(props) {
       description: enteredDescription,
     };
 
-    props.onAddVisit(parkVisitData);
+    props.onAddParkVisit(parkVisitData);
   }
 
   return (

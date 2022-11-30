@@ -2,9 +2,12 @@ import ParkItem from "./ParkItem";
 import "./ParkList.scss";
 
 function ParkList(props) {
+  console.log(props.parks);
+  const parks = props?.parks;
+
   return (
     <ul className="list">
-      {props.parks.map((park) => (
+      {parks.map((park) => (
         <ParkItem
           key={park.id}
           id={park.id}

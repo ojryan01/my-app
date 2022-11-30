@@ -1,30 +1,47 @@
 import ParkList from "../components/parks/ParkList";
-
-const dummyData = [
-  {
-    id: "m1",
-    title: "Yosemite National Park",
-    image:
-      "https://images.unsplash.com/photo-1562310503-a918c4c61e38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bmF0aW9uYWwlMjBwYXJrfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-    address: "Tioga Rd Hwy 120 & Hwy 140 Yosemite National Park, CA 95389",
-    description:
-      "Yosemite National Park is a popular landmark that is located in the state of California. It is known for being one of the most majestic and beautiful destinations in the United States.",
-  },
-  {
-    id: "m2",
-    title: "Haleakala National Park",
-    image:
-      "https://national-park.com/wp-content/uploads/2016/04/Welcome-to-the-Haleakala-National-Park.jpg",
-    address: "30,000 Haleakalā Hwy, Kula, HI 96790",
-    description:
-      "Haleakalā National Park is on the Hawaiian island of Maui. It’s home to the dormant Haleakalā Volcano and endangered Hawaiian geese. The Leleiwi and Kalahaku overlooks on the steep Crater Road have views across the West Maui Mountains. Rugged trails in the Summit District pass cinder cones and lava flows. In the coastal area of Kīpahulu are the Pools of Ohe’o, freshwater pools and waterfalls set amid bamboo forest.",
-  },
-];
+import { useState, useEffect } from "react";
 
 function AllMeetupsPage() {
+  async function fetchVisits() {
+    const response = await fetch(
+      "https://my-app-24207-default-rtdb.firebaseio.com/visits.json"
+    );
+    const visits = await response.json();
+    return visits;
+  }
+
+  const [loading, setIsLoading] = useState(true);
+  const [visits, setVisits] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const visits = [];
+    const data = fetchVisits().then((data) => {
+      for (const key in data) {
+        const visit = {
+          id: key,
+          ...data[key],
+        };
+        visits.push(visit);
+        console.log(visits);
+      }
+      setVisits(visits);
+      setIsLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return (
+      <div>
+        <p>Loading....</p>
+      </div>
+    );
+  }
+
+  console.log(visits);
   return (
     <div>
-      <ParkList parks={dummyData} />
+      <ParkList parks={visits} />
     </div>
   );
 }
