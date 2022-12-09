@@ -1,7 +1,28 @@
+import { useContext } from "react";
 import "./ParkItem.scss";
 import Card from "../ui/Card";
+import FavoritesContext from "../../store/favorites-context";
 
 function ParkItem(props) {
+  const favoritesCtx = useContext(FavoritesContext);
+  const itemIsFavorite = favoritesCtx.itemIsFavorite(props.id);
+  console.log(itemIsFavorite);
+
+  function toggleFavoriteStatusHandler() {
+    if (itemIsFavorite) {
+      console.log("Already a favorite");
+      favoritesCtx.removeFavorite(props.id);
+    } else {
+      console.log("not a fav");
+      favoritesCtx.addFavorite({
+        id: props.id,
+        title: props.title,
+        description: props.description,
+        address: props.address,
+      });
+    }
+  }
+
   return (
     <li className="item">
       <Card>
@@ -14,7 +35,11 @@ function ParkItem(props) {
           <p>{props.description}</p>
         </div>
         <div>
-          <button className="actions">favorite</button>
+          <button className="actions" onClick={toggleFavoriteStatusHandler}>
+            {itemIsFavorite
+              ? "Remove from Visited List"
+              : "Add to Visited List"}
+          </button>
         </div>
       </Card>
     </li>
